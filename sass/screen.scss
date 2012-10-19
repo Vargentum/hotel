@@ -1,0 +1,556 @@
+@charset "utf-8";
+@import "compass/reset";
+
+@import "h5bp";
+@include h5bp-display;
+@include h5bp-selection;
+@include h5bp-chromeframe;
+@include h5bp-media;
+@include h5bp-base;
+@include h5bp-typography;
+@include h5bp-figures;
+@include h5bp-forms;
+@include h5bp-embeds;
+@include h5bp-tables;
+@include h5bp-helpers;
+//@include h5bp-links;
+//@include h5bp-lists;
+
+//@import "compass/layout";
+//@import "compass/css3";
+//@import "compass/typography";
+//@import "compass/utilities";
+
+@import "compass";
+
+//SPRITING
+@import "layout/*.png";
+
+
+//border-box-sizing for all elems
+*{@include box-sizing(border-box);}
+input[type=search]{@include box-sizing(border-box);}
+
+/*VARIABLES
+--------------------------------------------*/
+//set liks color here
+$linkDefaultColor:#d60d44;
+$linkHoverColor:#eaac00;
+$linkActiveColor:#eaac00;
+$linkVisitedColor:#d60d44;
+$linkFocusedColor:#eaac00;
+//set colors here;
+$titleColor:#d60d44;
+//$attentionColor:red;
+//$servColor:grey;
+//base font params--------------------
+$baseFontFamily: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
+$baseFontColor: #464646;
+$baseFontSize:13px;
+$baseLineHeight: 1.4;
+//another fonts
+$titleFont: Georgia, Times, "Times New Roman", serif;
+//$addFont:;
+
+//layout params-----------------------
+$baseWidth: 980px;
+$ftrHeight:90px;
+
+/*FONT FACEing
+---------------------------------------------------------*/
+@each $font-face in
+galsc-webfont,
+galsc-bold-webfont,
+galsc-bolditalic-webfont,
+galsc-italic-webfont{
+ @font-face {
+   font-family: $font-face; font-style: normal; font-weight: normal;
+   src: url('../fonts/#{$font-face}.eot');
+   src: url('../fonts/#{$font-face}.eot?#iefix') format('embedded-opentype'),
+   url('../fonts/#{$font-face}.woff') format('woff'),
+   url('../fonts/#{$font-face}.ttf')  format('truetype');
+ }
+}
+
+$baseFont: 'galsc-webfont';
+$baseFontBold: 'galsc-bold-webfont';
+$baseFontItalic: 'galsc-bolditalic-webfont';
+$baseFontBoldItalic: 'galsc-italic-webfont';
+
+b,strong{
+  font-family: $baseFontBold;
+  em{font-family: $baseFontBoldItalic;}
+}
+em{
+  font-family: $baseFontItalic;
+  b, strong{font-family: $baseFontBoldItalic;}
+}
+/*MEDIA mixins
+---------------------------------------------------------*/
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: 479px) { @content; }
+  }
+  @else if $media == wide-handhelds {
+    @media only screen and (min-width: 480px) and (max-width: 767px) { @content; }
+  }
+  @else if $media == tablets {
+    @media only screen and (min-width: 768px) and (max-width: 959px) { @content; }
+  }
+}
+
+/*HELPER CLASSES
+---------------------------------------------------------*/
+//floats
+.floatLt{float: left;}
+.floatRt{float: right;}
+//pseudo elems mixin
+@mixin pseudoBlockAbs{
+  content: '';
+  display: block;
+  position: absolute;
+}
+//vertical centering mixin
+@mixin vCtr{
+  display: table-cell;
+  height: inherit;
+  vertical-align: middle;
+}
+//base horisontal mixin
+@mixin hList{&>*{@include inline-block;}}
+.l-hList{@include hList;}
+//justify list mixin
+@mixin jList{
+  text-align: justify;
+  line-height: 0;
+  font-size: 1px;
+  text-justify: newspaper;
+  zoom:1;
+  text-align-last: justify;
+  &:after{
+    content: "";
+    display: inline-block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 100%;
+  }
+  >*{
+    text-align: left;
+    @include inline-block;
+    line-height: $baseLineHeight;font-size: $baseFontSize;
+  }
+}
+.l-jList{@include jList;}
+//mixin for elems in string which full all parent container
+@mixin flexList{
+  .flexbox &{
+    @include display-box;
+    @include box-pack(justify);
+    &>*{@include box-flex(1);}
+  }
+  .no-flexbox &{@include jList;}
+}
+.flexList{@include flexList;}
+//hack for ie9 - need for gradient backgrounds
+:root .gradient {filter: none \0/IE9; }
+@mixin ie9-gradient-support{
+  $experimental-support-for-svg: true;
+  @extend .gradient;
+}
+@mixin pageWidth{width:$baseWidth; margin:auto;}
+.l-pageWidth{@include pageWidth;}
+
+@mixin link{
+  @include link-colors($linkDefaultColor, $linkHoverColor, $linkActiveColor, $linkVisitedColor, $linkFocusedColor);
+  @include single-transition(all,.4s,ease,0s);
+  //&.active{color:$linkHoverColor;}
+  &:focus {outline: thin dotted;}
+  &:active,&:hover {outline: 0;}
+  text-decoration: none;
+}
+@mixin link-behavior($property, $value) {
+  &:hover, &:active, &:focus {
+    #{$property}: $value;
+  }
+}
+@mixin link-simple-colors($startColor, $behaviorColor){
+  @include link-colors($startColor,$behaviorColor,$startColor, $startColor, $behaviorColor);
+}
+/*DEFAULT STYLES
+--------------------------------------------*/
+@mixin h1{font-size: 2em;margin: 0.67em 0;}
+@mixin h2{font-size: 1.5em;margin: 0.83em 0;}
+@mixin h3{font-size: 1.17em;margin: 1em 0;}
+@mixin h4{font-size: 1em;margin: 1.33em 0;}
+@mixin h5{font-size: 0.83em;margin: 1.67em 0;}
+@mixin h6{font-size: 0.75em;margin: 2.33em 0;}
+@mixin ul{margin: 1em 0;padding: 0 0 0 40px;}
+@mixin ol{margin: 1em 0;padding: 0 0 0 40px;}
+@mixin defaultCss{
+  h1{@include h1;}
+  h2{@include h2;}
+  h3{@include h3;}
+  h4{@include h4;}
+  h5{@include h5;}
+  h6{@include h6;}
+  ul{@include h1;}
+  ol{@include h1;}
+}
+.defaultCss{@include defaultCss;}
+
+a{@include link;}
+//@mixin input{}
+//@mixin textarea{}
+//@mixin radio{}
+//@mixin checkbox{}
+/*OBJECTS mixins
+--------------------------------------------*/
+
+/*LAYOUT
+----------------------------------------------------------*/
+html, button, input, select, textarea {
+  height: 100%;
+  font-family: $baseFontFamily;
+  color: $baseFontColor;
+}
+body {
+  height: 100%;
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+  background-color: #f0f0f0;
+}
+.l-pageWrap{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto;
+}
+  .l-pageHeader{}
+    .l-headerTopContent{background-color: #838383;}
+    .l-headerMainContent{
+  @include pageWidth;
+  padding: 25px 0;
+  background: url(../images/bg-header.png) 190px 100% no-repeat;
+  position: relative;
+  &:before{
+    @include pseudoBlockAbs;
+    background: url(../images/header__people.png);
+    width:511px;
+    height: 129px;
+    z-index: 1;
+    bottom:-10px;
+    right:25px;
+  }
+}
+.l-pageContentWrap{padding-bottom: $ftrHeight;}
+  .l-pageContent{
+  position: relative;
+  background-color: #fff;
+  @include box-shadow(0 0 3px rgba(0,0,0,.09));
+  @include border-radius(10px);
+  position: relative;
+  @include pageWidth;
+  padding:20px 10px 100px;
+  &:before{
+    @include pseudoBlockAbs;
+    background: url(../images/shadow-content_btm.png);
+    width:972px;
+    height: 39px;
+    left: 50%;
+    margin-left: -486px;
+    top:100%;
+  }
+}
+    .l-contentFooter{
+  @include jList;
+  padding: 27px 10px 0;
+  position: absolute;
+  bottom:10px;
+  width:$baseWidth - 20;
+  left:10px;
+  height: 73px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAABJBAMAAAD/Owo2AAAABGdBTUEAALGPC/xhBQAAACRQTFRFAAAA+Pj47u7u9/f38/Pz7+/v9PT08PDw9fX19vb28vLy8fHxgXZLSwAAAAF0Uk5TAEDm2GYAAAH1SURBVCjPJZK7ctoAEEXvTJqUnskfxGE00No4gDscIEKdAZtHF0BCKnka1AWBBGoyEU+pQwgQdIAeoJ8LkG1OsbszZ+8sAHzBrT65f24cTZQrPqcS7N2FKr3J6peu/LGLancopqbLrWPCaDB0h9fQ9ag3s+Hincw8FSULfGu2kIYJFLeu3XIMuMx0O1v/hCswOemsofNSt53WGLJVEgjOhsB5bMw4w5Juk8gUiK0glaFxWqPssagHhaT5IWBdyvQf0jL4wzQczjUx4zvSr0IPO2WskFQNAdlvfk3ewxzWha1zQn9HGW06hIZkj93zNxCc89iPr9A8Uk+V9RIO0SqYVgSLNrOqaiMMvXiFyWTxX2uM3sHxm4k6lNXNDANZ0QatMy4O/d+BGKyQqDLPNmJJ6W9PFZEjqTIZ7IF8rf4QfQQ4K1JkVA+zIbWg7CBOYXfKL3ewqOZ4/riHehKX/vAeUZvmrWQExkovMfMNxDf5+0BqgGa8tL6TINiZc0BZXval9f4+BNY4n1YFDyUuyFOlAooBOpTIDVB7Z0NZfQM3Vmnyhxm0+ouvOxkhxYjpYy4PglfzKpnELE+qeqyJ6CZ6PRnVzi1JCBVm4bEEars2MS9M0U0N1InH4SHvTenOBEdfR2ZIHSTb96tzA89K/Bop9JB5fYV/tOnqDvLL9MAAAAAASUVORK5CYII=);
+  background-repeat: repeat-x;
+  .ie87 &{background: url(../images/old-ie/bg-template_footer.png);}
+  .ie7 &{width:$baseWidth - 40px;}
+}
+.l-pageFooter{
+  @include jList;
+  position: relative;
+  height: $ftrHeight;
+  margin: -$ftrHeight auto 0;
+  width: $baseWidth;
+  text-transform: uppercase;
+  padding:40px 15px 0 25px;
+}
+/*HEADER ---------------------------->
+*/
+/*header top part  */
+.b-hdrTop__leftLink{
+  font-size: 11px;
+  line-height: 27px;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 25px;
+  @include link-simple-colors(#f0f0f0, $linkHoverColor);
+  &:before{
+    @include pseudoBlockAbs;
+    @include layout-sprite(top-lt);
+    width:18px; height: 20px;
+    top:50%;
+    margin-top: -10px;
+    left:0;
+  }
+  .no-accent{color:#cdcdcd;text-transform: none;}
+
+}
+.b-hdrTop__rightLink{
+  @include link-simple-colors(#cdcdcd, $linkHoverColor);
+  font-size: 11px;
+  text-transform: uppercase;
+  line-height: 27px;
+  position: relative;
+  padding-right: 25px;
+  &:before{
+    @include pseudoBlockAbs;
+    @include layout-sprite(top-rt);
+    width:18px; height: 18px;
+    top:50%;
+    margin-top: -9px;
+    right:0;
+  }
+}
+/*header main part*/
+.b-hdrLogo{margin-right: 35px;}
+.b-hdrPhone{
+  .l-pageHeader &{
+    position: relative;
+    top:7px;
+  }
+  .phone{font-size: 18px;}
+  .link{
+    font-family: $titleFont;
+    font-style: italic;
+    border-bottom: 1px dashed $linkDefaultColor;
+    @include link-behavior(border-bottom-color, $linkHoverColor);
+  }
+}
+.b-hdrLink{
+  font-family: $titleFont;
+  font-style: italic;
+  position: relative;
+  z-index: 2;
+  //padding-left: 50px;
+  min-height: 43px;
+  @include link-simple-colors($baseFontColor, $linkHoverColor);
+  >*{@include inline-block;}
+  &:before{
+    content: '';
+    @include inline-block;
+    background-color: rgb(252,234,4);
+    @include filter-gradient(#fcea04, #e29700, vertical);
+    @include background-image(linear-gradient(top,  rgba(252,234,4,1) 0%,rgba(249,213,3,1) 5%,rgba(247,209,2,1) 8%,rgba(241,187,1,1) 68%,rgba(235,178,1,1) 78%,rgba(232,165,0,1) 97%,rgba(226,151,0,1) 100%));
+    @include ie9-gradient-support;
+    width:42px; height: 42px;
+    margin:0 5px 0 5px;
+    @include border-radius;
+  }
+  &:hover:before,&:focus:before{@include rotate(180deg);}
+  &.item-1:after{
+    @include pseudoBlockAbs;
+    @include layout-sprite(hdr_link-1);
+    width:28px;
+    height: 28px;
+    top:7px;
+    left:12px;
+  }
+  &.item-2:after{
+    @include pseudoBlockAbs;
+    @include layout-sprite(hdr_link-2);
+    width:22px;
+    height: 24px;
+    top:9px;
+    left:15px;
+  }
+  &.item-3:after{
+    @include pseudoBlockAbs;
+    @include layout-sprite(hdr_link-3);
+    width:23px;
+    height: 23px;
+    top:9px;
+    left:15px;
+  }
+}
+
+
+//main column-------------->
+//.l-columnMain{}
+//left sidebar-------------->
+//.l-sideBarLt{}
+//right sidebar-------------->
+//.l-sideBarRt{}
+
+/*footer logotype*/
+.b-ftrLogo{}
+/*footer navigation*/
+.b-bottomNav{
+  ul{@include hList;}
+  .item{
+    text-transform: uppercase;
+    font-size: 12px;
+    @include link-simple-colors(#a4a4a4, $linkHoverColor);
+    padding:0 5px;
+    border-left: 1px solid #a4a4a4;
+  }
+  li:first-child .item{border-left: none;}
+}
+/*copyrihgt*/
+.b-copyright{
+  font-size: 11px;
+  color:#a4a4a4;
+}
+.b-partnersheep{
+  margin-left: 15px;
+  font-size: 11px;
+  @include link-simple-colors(#a4a4a4, $titleColor);
+  &:before{content: '▶';color:$titleColor; padding-right: 5px;}
+}
+.b-scroll_to_the_Top{
+  position: relative;top:3px;
+  font-size: 11px;
+  @include link-simple-colors(#a4a4a4, $titleColor);
+  &:before{content: '▲';color:$titleColor;padding-right: 5px;}
+}
+
+/*INDEPENDENT MODULES styles
+-----------------------------------------------------------------------------------------------*/
+.b-social{
+  font-family: $titleFont;
+  font-style: italic;
+  @include hList;
+  .item{
+    width:24px; height: 24px;
+    margin-left: 10px;
+    &:hover,&:focus{@include scale;}
+  }
+  @for $i from 1 through 4{
+    .item-#{$i}{@include layout-sprite(soc-#{$i});}
+  }
+  .l-headerMainContent &{
+    position: absolute;
+    top:25px;
+    right:0;
+  }
+}
+.b-mainNav{
+  ul{
+    //@include hList;
+    @include flexList;
+    background-color: #f0f0f0;
+    background-image: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/4QNtaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjMtYzAxMSA2Ni4xNDU2NjEsIDIwMTIvMDIvMDYtMTQ6NTY6MjcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTQ5RTU5NTQxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTQ5RTU5NTMxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkM0Q0I0NzJCRDEwRTIxMTlBNTFCQTcwNkMzQ0ZCQTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAmQWRvYmUAZMAAAAABAwAVBAMGCg0AAAUkAAAFUwAABZgAAAXM/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wgARCAAKAAoDAREAAhEBAxEB/8QAjQAAAwEAAAAAAAAAAAAAAAAAAAMECQEBAAAAAAAAAAAAAAAAAAAAABAAAwEBAAAAAAAAAAAAAAAAACABEBERAAECBAcAAAAAAAAAAAAAAABBMvARIaExgZGxQoJDEgEAAAAAAAAAAAAAAAAAAAAgEwEAAQQDAAMAAAAAAAAAAAABESDwITEAEFGBodH/2gAMAwEAAhEDEQAAAdyhBQB//9oACAEBAAEFAocJn//aAAgBAgABBQJP/9oACAEDAAEFAk//2gAIAQICBj8CH//aAAgBAwIGPwIf/9oACAEBAQY/ArVpNcSyaNccl2jM9HR1P//aAAgBAQMBPyFqyTGBgnGCsmPHPJ+GvgvTzS/T76f/2gAIAQIDAT8ho//aAAgBAwMBPyGj/9oADAMBAAIRAxEAABASD//aAAgBAQMBPxCRxKpQ2BXHGEVLpA/d+ZbrvK2vQ//aAAgBAgMBPxCj/9oACAEDAwE/EKP/2Q==);
+    padding:10px;
+    background-image: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/4QNtaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjMtYzAxMSA2Ni4xNDU2NjEsIDIwMTIvMDIvMDYtMTQ6NTY6MjcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTQ5RTU5NTQxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTQ5RTU5NTMxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkM0Q0I0NzJCRDEwRTIxMTlBNTFCQTcwNkMzQ0ZCQTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAmQWRvYmUAZMAAAAABAwAVBAMGCg0AAAUkAAAFUwAABZgAAAXM/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wgARCAAKAAoDAREAAhEBAxEB/8QAjQAAAwEAAAAAAAAAAAAAAAAAAAMECQEBAAAAAAAAAAAAAAAAAAAAABAAAwEBAAAAAAAAAAAAAAAAACABEBERAAECBAcAAAAAAAAAAAAAAABBMvARIaExgZGxQoJDEgEAAAAAAAAAAAAAAAAAAAAgEwEAAQQDAAMAAAAAAAAAAAABESDwITEAEFGBodH/2gAMAwEAAhEDEQAAAdyhBQB//9oACAEBAAEFAocJn//aAAgBAgABBQJP/9oACAEDAAEFAk//2gAIAQICBj8CH//aAAgBAwIGPwIf/9oACAEBAQY/ArVpNcSyaNccl2jM9HR1P//aAAgBAQMBPyFqyTGBgnGCsmPHPJ+GvgvTzS/T76f/2gAIAQIDAT8ho//aAAgBAwMBPyGj/9oADAMBAAIRAxEAABASD//aAAgBAQMBPxCRxKpQ2BXHGEVLpA/d+ZbrvK2vQ//aAAgBAgMBPxCj/9oACAEDAwE/EKP/2Q==);
+    background-repeat: repeat;
+    @include border-radius(10px);
+    .ie7 &{width:$baseWidth - 20;margin:auto;}
+
+  }
+  .item{
+    display: block;
+    @include border-radius;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 47px;
+    @include link-simple-colors(#363636, #fff);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0);
+    background-color: #ECECEC;
+    @include filter-gradient(#FCFCFC, #CBCBCB, vertical);
+    @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(252,252,252,1) 2%,rgba(244,244,244,1) 9%,rgba(236,236,236,1) 26%,rgba(203,203,203,1) 76%,rgba(194,194,194,1) 96%,rgba(183,183,183,1) 98%,rgba(166,166,166,1) 100%));
+    @include ie9-gradient-support;
+    .flexbox &{margin-left: 1px;text-align: center;}
+    .no-flexbox &{padding:0 12px;}
+    &.active,
+    &:hover,
+    &:focus{
+      color:#fff;
+      background-color: #58BD55;
+      @include filter-gradient(#8FE58A, #58BD55, vertical);
+      @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(143,229,138,1) 2%,rgba(129,218,126,1) 4%,rgba(102,200,99,1) 7%,rgba(88,189,85,1) 9%,rgba(85,183,84,1) 24%,rgba(78,174,76,1) 39%,rgba(69,157,70,1) 63%,rgba(64,150,63,1) 78%,rgba(59,142,60,1) 98%,rgba(166,166,166,1) 100%));
+    }
+    &:active{
+      background-color: rgb(166,166,166);
+      @include filter-gradient(#a6a6a6, #dfdfdf, vertical);
+      @include background-image(linear-gradient(top,  rgba(166,166,166,1) 0%,rgba(59,142,60,1) 2%,rgba(64,150,63,1) 22%,rgba(69,157,70,1) 37%,rgba(78,174,76,1) 61%,rgba(85,183,84,1) 76%,rgba(88,189,85,1) 91%,rgba(102,200,99,1) 93%,rgba(129,218,126,1) 96%,rgba(143,229,138,1) 98%,rgba(223,223,223,1) 100%));
+    }
+  }
+  .item__lucky{
+    @include link-simple-colors(#fff, #fff);
+    text-shadow: 0 -1px 1px rgba(0,0,0,.39);
+    background-color: #E81363;
+    @include filter-gradient(#F31A85, #DB0F4E, vertical);
+    @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(243,26,133,1) 2%,rgba(232,19,99,1) 4%,rgba(219,15,78,1) 7%,rgba(213,12,67,1) 9%,rgba(208,9,64,1) 26%,rgba(205,11,64,1) 30%,rgba(206,9,63,1) 35%,rgba(187,3,53,1) 76%,rgba(183,0,49,1) 96%,rgba(170,0,41,1) 98%,rgba(166,166,166,1) 100%));
+  }
+  .item__skype_status{
+    @include link-simple-colors(#fff, #fff);
+    text-shadow: 0 -1px 1px rgba(0,0,0,.39);
+    .no-flexbox &{width:90px; text-align: center;padding:0;}
+    background-color: #60C7F2;
+    @include filter-gradient(#C2F2FE, #60C7F2, vertical);
+    @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(194,242,254,1) 2%,rgba(124,217,250,1) 7%,rgba(107,209,249,1) 9%,rgba(96,199,242,1) 26%,rgba(47,157,216,1) 78%,rgba(36,148,211,1) 96%,rgba(28,133,201,1) 98%,rgba(166,166,166,1) 100%));
+    img{position: relative;top:-3px;left:3px;}
+  }
+}
+.b-crumbs{
+  padding:7px 0 10px 12px;
+  position: relative;
+  &:before{
+    @include pseudoBlockAbs;
+    background: url(../images/shadow-content_top.png);
+    width:960px;
+    height: 120px;
+    left:50%;
+    margin-left: -480px;
+    top:100%;
+  }
+  ul{@include hList;}
+  .item{
+    text-transform: uppercase;
+    @include link-simple-colors(#323232, $linkDefaultColor);
+    &:after{
+      content: '→';
+      padding:0 1px 0 5px;
+      color:#ad3225;
+      position: relative;
+      top:-2px;
+    }
+  }
+  li:last-child .item{
+    @include link-simple-colors($linkDefaultColor, $linkDefaultColor);
+    cursor: default;
+    &:after{display: none;}
+  }
+}
+/*MAIN page specific elements styles
+-----------------------------------------------------------------------------------------------*/
+.page{position: relative;}
+.page-main{
+  padding:45px 0;
+}
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
+/*PLUGINS styles
+------------------------------------------------------------------------------------------------*/
+
+
+//debug
+//* { outline: 2px dotted red; }
+//* * { outline: 2px dotted green; }
+//* * * { outline: 2px dotted orange; }
+//* * * * { outline: 2px dotted blue; }
+//* * * * * { outline: 1px solid red; }
+//* * * * * * { outline: 1px solid green; }
+//* * * * * * * { outline: 1px solid orange; }
+//* * * * * * * * { outline: 1px solid blue; }
