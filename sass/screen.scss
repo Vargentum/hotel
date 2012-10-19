@@ -23,8 +23,11 @@
 
 @import "compass";
 
+@import "animation";
+@import "animation/animate";
 //SPRITING
 @import "layout/*.png";
+@import "benefits_list/*.png";
 
 
 //border-box-sizing for all elems
@@ -196,6 +199,7 @@ em{
   h6{@include h6;}
   ul{@include h1;}
   ol{@include h1;}
+  p{margin-bottom: 15px;text-indent: 10px;}
 }
 .defaultCss{@include defaultCss;}
 
@@ -206,7 +210,10 @@ a{@include link;}
 //@mixin checkbox{}
 /*OBJECTS mixins
 --------------------------------------------*/
-
+//@mixin title{
+//  font-family: $titleFont;
+//  color:$titleColor;
+//}
 /*LAYOUT
 ----------------------------------------------------------*/
 html, button, input, select, textarea {
@@ -341,7 +348,6 @@ body {
   font-style: italic;
   position: relative;
   z-index: 2;
-  //padding-left: 50px;
   min-height: 43px;
   @include link-simple-colors($baseFontColor, $linkHoverColor);
   >*{@include inline-block;}
@@ -350,6 +356,7 @@ body {
     @include inline-block;
     background-color: rgb(252,234,4);
     @include filter-gradient(#fcea04, #e29700, vertical);
+    @include ie9-gradient-support;
     @include background-image(linear-gradient(top,  rgba(252,234,4,1) 0%,rgba(249,213,3,1) 5%,rgba(247,209,2,1) 8%,rgba(241,187,1,1) 68%,rgba(235,178,1,1) 78%,rgba(232,165,0,1) 97%,rgba(226,151,0,1) 100%));
     @include ie9-gradient-support;
     width:42px; height: 42px;
@@ -445,10 +452,8 @@ body {
 }
 .b-mainNav{
   ul{
-    //@include hList;
     @include flexList;
     background-color: #f0f0f0;
-    background-image: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/4QNtaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjMtYzAxMSA2Ni4xNDU2NjEsIDIwMTIvMDIvMDYtMTQ6NTY6MjcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTQ5RTU5NTQxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTQ5RTU5NTMxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkM0Q0I0NzJCRDEwRTIxMTlBNTFCQTcwNkMzQ0ZCQTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAmQWRvYmUAZMAAAAABAwAVBAMGCg0AAAUkAAAFUwAABZgAAAXM/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wgARCAAKAAoDAREAAhEBAxEB/8QAjQAAAwEAAAAAAAAAAAAAAAAAAAMECQEBAAAAAAAAAAAAAAAAAAAAABAAAwEBAAAAAAAAAAAAAAAAACABEBERAAECBAcAAAAAAAAAAAAAAABBMvARIaExgZGxQoJDEgEAAAAAAAAAAAAAAAAAAAAgEwEAAQQDAAMAAAAAAAAAAAABESDwITEAEFGBodH/2gAMAwEAAhEDEQAAAdyhBQB//9oACAEBAAEFAocJn//aAAgBAgABBQJP/9oACAEDAAEFAk//2gAIAQICBj8CH//aAAgBAwIGPwIf/9oACAEBAQY/ArVpNcSyaNccl2jM9HR1P//aAAgBAQMBPyFqyTGBgnGCsmPHPJ+GvgvTzS/T76f/2gAIAQIDAT8ho//aAAgBAwMBPyGj/9oADAMBAAIRAxEAABASD//aAAgBAQMBPxCRxKpQ2BXHGEVLpA/d+ZbrvK2vQ//aAAgBAgMBPxCj/9oACAEDAwE/EKP/2Q==);
     padding:10px;
     background-image: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/4QNtaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjMtYzAxMSA2Ni4xNDU2NjEsIDIwMTIvMDIvMDYtMTQ6NTY6MjcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTQ5RTU5NTQxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTQ5RTU5NTMxOUVDMTFFMkI5NDZERDJGMkZENjFCMjkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkM0Q0I0NzJCRDEwRTIxMTlBNTFCQTcwNkMzQ0ZCQTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMThEQkJGNTAwMDFENjJCODEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAmQWRvYmUAZMAAAAABAwAVBAMGCg0AAAUkAAAFUwAABZgAAAXM/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wgARCAAKAAoDAREAAhEBAxEB/8QAjQAAAwEAAAAAAAAAAAAAAAAAAAMECQEBAAAAAAAAAAAAAAAAAAAAABAAAwEBAAAAAAAAAAAAAAAAACABEBERAAECBAcAAAAAAAAAAAAAAABBMvARIaExgZGxQoJDEgEAAAAAAAAAAAAAAAAAAAAgEwEAAQQDAAMAAAAAAAAAAAABESDwITEAEFGBodH/2gAMAwEAAhEDEQAAAdyhBQB//9oACAEBAAEFAocJn//aAAgBAgABBQJP/9oACAEDAAEFAk//2gAIAQICBj8CH//aAAgBAwIGPwIf/9oACAEBAQY/ArVpNcSyaNccl2jM9HR1P//aAAgBAQMBPyFqyTGBgnGCsmPHPJ+GvgvTzS/T76f/2gAIAQIDAT8ho//aAAgBAwMBPyGj/9oADAMBAAIRAxEAABASD//aAAgBAQMBPxCRxKpQ2BXHGEVLpA/d+ZbrvK2vQ//aAAgBAgMBPxCj/9oACAEDAwE/EKP/2Q==);
     background-repeat: repeat;
@@ -465,9 +470,9 @@ body {
     @include link-simple-colors(#363636, #fff);
     text-shadow: 0 -1px 1px rgba(0,0,0,0);
     background-color: #ECECEC;
+    @include ie9-gradient-support;
     @include filter-gradient(#FCFCFC, #CBCBCB, vertical);
     @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(252,252,252,1) 2%,rgba(244,244,244,1) 9%,rgba(236,236,236,1) 26%,rgba(203,203,203,1) 76%,rgba(194,194,194,1) 96%,rgba(183,183,183,1) 98%,rgba(166,166,166,1) 100%));
-    @include ie9-gradient-support;
     .flexbox &{margin-left: 1px;text-align: center;}
     .no-flexbox &{padding:0 12px;}
     &.active,
@@ -475,11 +480,13 @@ body {
     &:focus{
       color:#fff;
       background-color: #58BD55;
+      @include ie9-gradient-support;
       @include filter-gradient(#8FE58A, #58BD55, vertical);
       @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(143,229,138,1) 2%,rgba(129,218,126,1) 4%,rgba(102,200,99,1) 7%,rgba(88,189,85,1) 9%,rgba(85,183,84,1) 24%,rgba(78,174,76,1) 39%,rgba(69,157,70,1) 63%,rgba(64,150,63,1) 78%,rgba(59,142,60,1) 98%,rgba(166,166,166,1) 100%));
     }
     &:active{
       background-color: rgb(166,166,166);
+      @include ie9-gradient-support;
       @include filter-gradient(#a6a6a6, #dfdfdf, vertical);
       @include background-image(linear-gradient(top,  rgba(166,166,166,1) 0%,rgba(59,142,60,1) 2%,rgba(64,150,63,1) 22%,rgba(69,157,70,1) 37%,rgba(78,174,76,1) 61%,rgba(85,183,84,1) 76%,rgba(88,189,85,1) 91%,rgba(102,200,99,1) 93%,rgba(129,218,126,1) 96%,rgba(143,229,138,1) 98%,rgba(223,223,223,1) 100%));
     }
@@ -488,6 +495,7 @@ body {
     @include link-simple-colors(#fff, #fff);
     text-shadow: 0 -1px 1px rgba(0,0,0,.39);
     background-color: #E81363;
+    @include ie9-gradient-support;
     @include filter-gradient(#F31A85, #DB0F4E, vertical);
     @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(243,26,133,1) 2%,rgba(232,19,99,1) 4%,rgba(219,15,78,1) 7%,rgba(213,12,67,1) 9%,rgba(208,9,64,1) 26%,rgba(205,11,64,1) 30%,rgba(206,9,63,1) 35%,rgba(187,3,53,1) 76%,rgba(183,0,49,1) 96%,rgba(170,0,41,1) 98%,rgba(166,166,166,1) 100%));
   }
@@ -496,6 +504,7 @@ body {
     text-shadow: 0 -1px 1px rgba(0,0,0,.39);
     .no-flexbox &{width:90px; text-align: center;padding:0;}
     background-color: #60C7F2;
+    @include ie9-gradient-support;
     @include filter-gradient(#C2F2FE, #60C7F2, vertical);
     @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(194,242,254,1) 2%,rgba(124,217,250,1) 7%,rgba(107,209,249,1) 9%,rgba(96,199,242,1) 26%,rgba(47,157,216,1) 78%,rgba(36,148,211,1) 96%,rgba(28,133,201,1) 98%,rgba(166,166,166,1) 100%));
     img{position: relative;top:-3px;left:3px;}
@@ -534,9 +543,109 @@ body {
 /*MAIN page specific elements styles
 -----------------------------------------------------------------------------------------------*/
 .page{position: relative;}
-.page-main{
-  padding:45px 0;
+/*BENEFITS page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.page-benefits_list{
+  .csscolumns &{
+    @include columns(460px 2);
+  }
+  padding:45px 10px;
+  .item{
+    .csscolumns &{@include column-break-inside(avoid);}
+    margin-bottom: 60px;
+    padding: 5px 0 0 130px;
+    position: relative;
+    height: 120px;
+    &>*{position: relative;}
+    &:before{
+      @include pseudoBlockAbs; width:120px; height: 120px;left:0;top:0;
+      @include border-radius(20px);
+      background-color: rgb(182,226,242);
+      @include filter-gradient(#b6e2f2, #f5f8f9, horizontal);
+      @include background-image(radial-gradient(center, ellipse cover,  rgba(182,226,242,1) 0%,rgba(245,248,249,1) 77%,rgba(245,248,249,1) 100%));
+      @include ie9-gradient-support;
+    }
+    &:after{@include pseudoBlockAbs;}
+    &.item-1:after{width: 42px; height: 41px; left: 42px; top: 40px;}
+    &.item-2:after{width: 45px; height: 42px; left: 39px; top: 40px;}
+    &.item-3:after{width: 48px; height: 34px; left: 38px; top: 43px;}
+    &.item-4:after{width: 38px; height: 41px; left: 42px; top: 40px;}
+    &.item-5:after{width: 43px; height: 44px; left: 39px; top: 39px;}
+    &.item-6:after{width: 45px; height: 39px; left: 38px; top: 40px;}
+    @for $i from 1 through 6{
+      &.item-#{$i}:after{@include benefits_list-sprite(item-#{$i});}
+    }
+  }
+  .title{
+    font-family: $titleFont;
+    line-height: 1.2;
+    margin-bottom: 3px;
+    color:$titleColor;
+    text-transform: uppercase;
+  }
 }
+/*LUCKY page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.page-lucky{
+  .image{
+    margin:25px 0 35px;
+    position: relative;
+    border:5px solid #eee;
+    @include border-radius(10px);
+    height: 420px;
+    background: #fff url(../images/bg-page-lucky.png) 50% 0 no-repeat;
+  }
+  .content{
+    margin:30px 0;
+    .csscolumns &{@include columns(465px 2);}
+    color:#939393;
+    @include defaultCss;
+  }
+}
+.b-coupon{
+  width:421px; height: 262px;
+  background-image: url(../images/bg-coupon.png);
+  position: relative;
+  @include animation(pulse 1s infinite);
+  .page-lucky &{
+    position: absolute;
+    right:188px;
+    bottom: 100px;
+  }
+  .discount_counter{
+    position: absolute;
+    font-size: 200px;
+    font-weight: bold;
+    color:#fff;
+    right:15px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,.39);
+    &:after{content: '%';font-size: 150px;}
+  }
+}
+.b-linkPrint{
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAABWVBMVEUAAADGIk7LMlzUUnbPQmjYYoLHBD3FBDzEAzvCAzvsF3bfD1TpFm/mEmTnE2jkEl/hEVjYB1DIBT7JBz/XBk/VBk7MAULSAUi8ATbTA0q/ATizAC/aDkzZDkviEF7VBE3hElnPCj3VDETpFW3fEFPTA0vAAjnUDETWDEjhEFzBAjrUBE3MCTvXKVngDlrVDEfNCEHcClXcC1fZCVLaClTLCEDOCUPdDFjfDFnQCkTSCkXfDlnSC0XTC0bLCTrQF0rJCTmpACeyAS6tASqzAi6xAS20Ai/ICTi1AzC3AzC4AzHHCDjFCDe9BTO6AzG8BDK/BjTDBzbCBjX77/Lig53jg53NQWj88PPBBDjDBTnEBjrGBzvIBzzJCD2+AzbQQmncR3DSC0K7AjXRC0G/BDe8AzbLCT7NCT+6AjTgEVbPCkDOCj+5ATO4ATPrFnLYDUnTDEKrACn////DKJIxAAAAAXRSTlMAQObYZgAAAQVJREFUeNptyVWPwlAUBOBZd3d3d/dl3R0odRZoYV3m/z/svU1DGrZfMpnJOUD1V4gRoLa+8fW/wVHU1fR+hxhGQ9/ET4gh9E+mhDnmpTyzmFrISHz2MePZx/zem0SR4DjAzu67RJHgOMfmdi4XSZA5H5mQdY2NrWxW3Jn1UXxE3WB53bJYwLKsRywtmiYD4nHSNM0nrK4ZBgNiMdIwjAestOg6C+i6foumZk1jAU3T7tFarqosSTLpY7KMqqreoa3CcVjs0PHRKZX7CgOVth0lWUSPLRK1bfsSM1Wu6yoKXR8VRdYFxqbTEvPSnjN0jb+EOUFH90eYU7R3foY4OgZ6fkMc4g/yJdhbz5XgXQAAAABJRU5ErkJggg==);
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  padding-left: 30px;
+  font-style: italic;
+  color:$titleColor;
+  font-family: $titleFont;
+  min-height: 24px;
+  .page-lucky &{
+    position: absolute;
+    right:45px;
+    bottom: 45px;
+    line-height: 22px;
+  }
+}
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
 /*SOME page specific elements styles
 ------------------------------------------------------------------------------------------------*/
 /*SOME page specific elements styles
