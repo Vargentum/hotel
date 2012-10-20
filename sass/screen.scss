@@ -33,7 +33,6 @@
 //border-box-sizing for all elems
 *{@include box-sizing(border-box);}
 input[type=search]{@include box-sizing(border-box);}
-
 /*VARIABLES
 --------------------------------------------*/
 //set liks color here
@@ -180,6 +179,16 @@ em{
 @mixin link-simple-colors($startColor, $behaviorColor){
   @include link-colors($startColor,$behaviorColor,$startColor, $startColor, $behaviorColor);
 }
+/*ANIMATION
+*/
+@include keyframes(shadowPulse) {
+  0%, 100% {
+    box-shadow: 0 0 2px 0 $linkHoverColor;
+  }
+  50% {
+    box-shadow: 0 0 15px 0 $linkHoverColor;
+  }
+}
 /*DEFAULT STYLES
 --------------------------------------------*/
 @mixin h1{font-size: 2em;margin: 0.67em 0;}
@@ -204,16 +213,75 @@ em{
 .defaultCss{@include defaultCss;}
 
 a{@include link;}
-//@mixin input{}
-//@mixin textarea{}
-//@mixin radio{}
-//@mixin checkbox{}
+input,textarea{
+  @include single-transition(all,.4s,ease,0s);
+  min-height: 25px;
+  padding:0 5px;
+  @include border-radius;
+  border: solid 1px #b1b7bb;
+  background-color: rgb(255,255,255);
+  @include filter-gradient(#f5f5f5, #ffffff, vertical);
+  @include background-image(linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 4%,rgba(237,237,237,1) 9%,rgba(238,238,238,1) 17%,rgba(255,255,255,1) 61%,rgba(255,255,255,1) 100%));
+  &:active, &:focus{
+    outline: none;
+    @include animation(shadowPulse 2s infinite);
+  }
+}
+textarea{
+  min-height: 60px;padding:2px 5px;
+  background-color: rgb(245,245,245);
+  @include ie9-gradient-support;
+  @include filter-gradient(#f5f5f5, #ffffff, vertical);
+  @include background-image(linear-gradient(top,  rgba(245,245,245,1) 0%,rgba(237,237,237,1) 2%,rgba(237,237,237,1) 5%,rgba(243,243,243,1) 21%,rgba(255,255,255,1) 42%,rgba(255,255,255,1) 100%));
+
+}
+input[type=radio],input[type=checkbox]{}
+button[type=submit]{
+  background-color: #E81363;
+  @include ie9-gradient-support;
+  @include filter-gradient(#F31A85, #DB0F4E, vertical);
+  @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(243,26,133,1) 2%,rgba(232,19,99,1) 4%,rgba(219,15,78,1) 7%,rgba(213,12,67,1) 9%,rgba(208,9,64,1) 26%,rgba(205,11,64,1) 30%,rgba(206,9,63,1) 35%,rgba(187,3,53,1) 76%,rgba(183,0,49,1) 96%,rgba(170,0,41,1) 98%,rgba(166,166,166,1) 100%));
+  border:none;
+  text-transform: uppercase;
+  color:#fff;
+  &:active{
+    background-color: #E81363;
+    @include filter-gradient(#db0f4e, #F31A85, horizontal);
+    @include background-image(radial-gradient(center, ellipse cover,  rgba(166,166,166,1) 0%,rgba(170,0,41,1) 2%,rgba(183,0,49,1) 4%,rgba(187,3,53,1) 24%,rgba(206,9,63,1) 65%,rgba(205,11,64,1) 70%,rgba(208,9,64,1) 74%,rgba(213,12,67,1) 91%,rgba(219,15,78,1) 93%,rgba(232,19,99,1) 96%,rgba(243,26,133,1) 98%,rgba(223,223,223,1) 100%));
+  }
+}
 /*OBJECTS mixins
 --------------------------------------------*/
 //@mixin title{
 //  font-family: $titleFont;
 //  color:$titleColor;
 //}
+@mixin square{
+  min-height: 43px;
+  >*{@include inline-block;}
+  &:before{
+    content: '';
+    @include inline-block;
+    background-color: rgb(252,234,4);
+    @include filter-gradient(#fcea04, #e29700, vertical);
+    @include ie9-gradient-support;
+    @include background-image(linear-gradient(top,  rgba(252,234,4,1) 0%,rgba(249,213,3,1) 5%,rgba(247,209,2,1) 8%,rgba(241,187,1,1) 68%,rgba(235,178,1,1) 78%,rgba(232,165,0,1) 97%,rgba(226,151,0,1) 100%));
+    @include ie9-gradient-support;
+    width:42px; height: 42px;
+    margin:0 5px 0 5px;
+    @include border-radius;
+  }
+}
+@mixin square-after{
+  position: relative;
+  &:after{
+    @include pseudoBlockAbs;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width:42px; height: 42px;
+    left:0;top:0;
+  }
+}
 /*LAYOUT
 ----------------------------------------------------------*/
 html, button, input, select, textarea {
@@ -348,21 +416,8 @@ body {
   font-style: italic;
   position: relative;
   z-index: 2;
-  min-height: 43px;
   @include link-simple-colors($baseFontColor, $linkHoverColor);
-  >*{@include inline-block;}
-  &:before{
-    content: '';
-    @include inline-block;
-    background-color: rgb(252,234,4);
-    @include filter-gradient(#fcea04, #e29700, vertical);
-    @include ie9-gradient-support;
-    @include background-image(linear-gradient(top,  rgba(252,234,4,1) 0%,rgba(249,213,3,1) 5%,rgba(247,209,2,1) 8%,rgba(241,187,1,1) 68%,rgba(235,178,1,1) 78%,rgba(232,165,0,1) 97%,rgba(226,151,0,1) 100%));
-    @include ie9-gradient-support;
-    width:42px; height: 42px;
-    margin:0 5px 0 5px;
-    @include border-radius;
-  }
+  @include square;
   &:hover:before,&:focus:before{@include rotate(180deg);}
   &.item-1:after{
     @include pseudoBlockAbs;
@@ -513,6 +568,7 @@ body {
 .b-crumbs{
   padding:7px 0 10px 12px;
   position: relative;
+  z-index: 1;
   &:before{
     @include pseudoBlockAbs;
     background: url(../images/shadow-content_top.png);
@@ -540,9 +596,17 @@ body {
     &:after{display: none;}
   }
 }
+.b-ftr_slogan{
+  background-image: url(../images/ftr-slogan.png);
+  width:960px;
+  height: 114px;
+  margin: 20px auto;
+}
+
 /*MAIN page specific elements styles
 -----------------------------------------------------------------------------------------------*/
 .page{position: relative;}
+
 /*BENEFITS page specific elements styles
 ------------------------------------------------------------------------------------------------*/
 .page-benefits_list{
@@ -584,9 +648,12 @@ body {
     text-transform: uppercase;
   }
 }
+
 /*LUCKY page specific elements styles
 ------------------------------------------------------------------------------------------------*/
 .page-lucky{
+  z-index: 1;
+  background-color: #fff;
   .image{
     margin:25px 0 35px;
     position: relative;
@@ -638,18 +705,190 @@ body {
     line-height: 22px;
   }
 }
+
+/*ABOUT US page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.page-aboutUs{
+  padding: 10px;
+  >article{
+    clear: both;margin-bottom: 30px;
+    img{margin-bottom: 30px;}
+  }
+  .title{font: 30px $titleFont;color:$titleColor; overflow: hidden;}
+}
+.b-ourManagers{
+  .page-aboutUs &{margin-top: 50px;}
+  clear: both;
+  .title{
+    font: 30px $titleFont;color:$titleColor; overflow: hidden;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .person{
+    width:225px;
+    img{@include border-radius(10px);}
+    .name{
+      font: 18px $titleFont;
+      color:$titleColor;
+      text-align: center;
+      margin-top: 5px;
+    }
+    .jobTitle{
+      font:italic 18px $titleFont;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+/*CONTACT US page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.page-contactUs{
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+  margin:25px 10px 200px;
+  border:5px solid #eee;
+  @include border-radius(10px);
+  padding:25px 35px;
+  @include jList;
+
+  .l-sidebarLt{
+    vertical-align: top;
+    width:335px;
+    position: relative;
+    &:before{
+      @include pseudoBlockAbs;
+      height: 100%;
+      width:2px;
+      @include border-radius(0 50% 50% 0);
+      background-color: #eee;
+      right:0;
+      top:0;
+    }
+  }
+  .l-sidebarRt{width:520px;vertical-align: top;}
+}
+.b-phone{
+  @include square;
+  @include square-after;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  position: relative;
+  &:after{
+    left:5px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAvVBMVEXu7u7////////v7+/////y8vL////6+vr////////x8fH////////z8/P////////////z8/Pv7+/////////////////////////////////////////////////////y8vL8/Pz9/f3y8vLx8fH29vbx8fH////////////////6+vrw8PD////19fX////////u7u7////09PQAAADv7+/x8fHv7+/8/Pz39/fv7+/9/f36+vry8vL///+FvSgtAAAANXRSTlP+hXPxIOB9sEOP4muX2W6Yb9P3mWwBW4RjSmJlLU4lUdyopd3kw+Y3Nk1Vsu0CyRoX/B7SAH6QiLUAAACNSURBVHjaTc5FEsMwEERRh5kZHSazPVHFJafvf6yMtMn85Vt0tdMEOiRyWm3ovgR0MxTTmYBiMIKKBOAzyRbBHxSQzwOxEQJ6LUd3APy9ADqynGMB0Y3lmhIXW6BHwnLYEi3HQwv0/LIkmxU/rFuglwNOeT2gZIHuF5gaNYDBlJ4MaK/iG7C54RvIy9Uf5zcwnMMqFxoAAAAASUVORK5CYII=);
+  }
+}
+.b-callback{
+  @include square;
+  @include square-after;
+  padding-right: 30px;
+  position: relative;
+  &:before{position: absolute;top:0;left:0;}
+  &:after{
+    left: 7px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAMAAAB2Mu6sAAABC1BMVEXv7+/////////x8fH////////////////////////////////////////////////z8/Pv7+/v7+/6+vry8vL////////////////////////////////////6+vr5+fn////////////////y8vL09PTw8PD8/Pz////w8PD9/f3y8vLx8fH29vbx8fH////////////////7+/v8/Pz////////////6+vr////19fXz8/Pw8PD////7+/v////////////5+fn////////////////09PT////u7u7////u7u7////u7u4AAADw8PDw8PD8/Pz6+vr29vb9/f34+Pj5+fny8vL///96NtJ9AAAAT3RSTlP+a5nibI+XmG5DAZIOW4ST2ffxsOAIYoVjb30JIGWztS1OJVHc0OuoKOyl3eTD5nU3NlWtqyxNnrICydPtEK4aShe2cwoeKtIN/Ez9D/4AgEMQ1wAAAOVJREFUeNpl0NdWwkAUheFYsYu9i733ihQBEZKQZGdpivv9n8RzzGLB4H8z5buZMxYG6nxm6z/4OPYzmCSH+uGdJ2d/MDbCeALayozjONglf+oKHLeZjk7JdjrxPM9NKDUV0lyZYU3glb2e2hb5NWzPvQ3A47MVksms3mM+DYLASyndAlaJjFehbVV930eBjDoQ2CdZOeh/7nk7G/BU5LLRG7BcRQa1G5HrFqSG+SX3rsjRHrC+sAGtC3iJRNydus3vTQPwEFAKi3lyzQDcXVFbWiZNQOtCIS4uVgzQDkshGTW3u+dfIQ96YgRZOsEAAAAASUVORK5CYII=);
+  }
+  .title{
+    font-size: 12px; text-transform: uppercase;
+    margin:5px 0 7px 55px;
+  }
+  label{
+    display: block;
+    @include jList;
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  input,textarea{width:165px;margin-left: 10px;}
+  input[type=datetime]{
+    width:105px;margin-right: 60px; position: relative;
+    z-index: 2;
+    border-right-color: #e9e9e9;
+  }
+  button{
+    position: absolute;
+    height: 25px;
+    right: 53px;
+    bottom:1px;
+    line-height: 25px;
+    padding:0 10px 0 30px;
+    z-index: 1;
+    @include border-radius;
+  }
+}
+.b-skype{
+  @include square;
+  @include square-after;
+  &:before{
+    vertical-align: top;
+    background-color: #60C7F2;
+    @include ie9-gradient-support;
+    @include filter-gradient(#C2F2FE, #60C7F2, vertical);
+    @include background-image(linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(194,242,254,1) 2%,rgba(124,217,250,1) 7%,rgba(107,209,249,1) 9%,rgba(96,199,242,1) 26%,rgba(47,157,216,1) 78%,rgba(36,148,211,1) 96%,rgba(28,133,201,1) 98%,rgba(166,166,166,1) 100%));
+  }
+  &:after{
+    left:5px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAMAAABBJv+bAAAA4VBMVEXu7u7u7u7////////u7u7////////////5+fnw8PD////////+/v79/f3////////////09PT////39/f19fXv7+/////29vbx8fH////////y8vL////////////////4+Pj////8/Pz////////////////////4+Pj////y8vLv7+/////////////////////////////////////////////////////////////////7+/v////////6+vr////z8/P////////u7u7z8/MAAAD8/Pz5+fnx8fH///8J7YpaAAAAR3RSTlP+/mZF+BWNVLbtYDmjpz97NtBIwczxdcXiLZDebwY8DL2Wq2OZIaAwuSTb9BhdgTOEfhIbcml4Sx4PCUKuhwOyJ9MqnPzXACl4nDYAAAFOSURBVHjabdDXdsIwDAbgnu69mWVvWvbOICEQC+z3f6BKHgQC/00kfyeJpQugzBvsmvldG+IhbgdChXMhwmDQP+ICF7EwJ+J6KE5TsQ1XxLkEHcWL6CgxLHTA6ld96bbkicFdLg86Tw/YP0suG3UgymqLJ3NiV/MtNjcuF+FyDODRMOzw7TU2GzX942opi3fkqeYRclYcZYk83qqaVjXK8kP+Roaaqjf6UtXeh+GQeLRTzQxMmhs9DDFoFr9TC3Q+1Vmb+E/s8/OSW0sfyPaLOCWOcl9Ezuhpkd/Up33jQ+S8KifIa31xR/9lijzW4yBDC4suPq1ZiQs29LCcKXaJm7iZ9AIOcqenqREDrZh392hPtIqkZK8lp+pdZXBtTi/a7EIyFEviXFxQDN5ge6ph3TCO58eVvwKxSefSZ4mQca3BCojjsZKpNGeNuWz+AflQ3Aawf8SDAAAAAElFTkSuQmCC);
+  }
+  .item{margin:5px 0 10px;}
+  .title{text-transform: uppercase;font-size: 12px;}
+  .person{font-style: italic; font-family: $titleFont;}
+}
+.b-mailUs{
+  margin-right: 135px;
+  padding-bottom: 30px;
+  position: relative;
+  .title{
+    text-align: left;
+    margin-left: 51px;
+    @include square;
+    @include square-after;
+    &:after{
+      left:5px;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAMAAAB2Mu6sAAAAKlBMVEX6+vrw8PD29vb///////////8AAAD////////////y8vL////v7+////9jNCrwAAAADHRSTlOz7sdQcIAAYDCg2xCKz+rjAAAAgUlEQVR42nXR4Q7DIAgEYNdZEY97/9edpSFYt/FD432GBC2DP2sUUm1PTckJvW9ivTvYU/zsQBOMpTveRodZUzIXkgE8obzPqFyB2jS2gBDUyAOyueBgwiIY3EDhA7yuFZqgreZVaRpwNIk0hyo+Kh/Vp0wwfD8i7IJzy+nR34/6AOQ/FFGQISWyAAAAAElFTkSuQmCC);
+    }
+    font: bold 15px $titleFont;
+    color:#363636;
+    text-transform: uppercase;
+    &:before{margin-right: 10px;}
+  }
+  label{
+    text-align: right;
+    display: block;
+    margin-top: 15px;
+  }
+  input,textarea{width:240px;margin-left: 15px}
+  textarea{position: relative;z-index: 2;height: 140px;}
+  button{
+    position: absolute;
+    width:240px;
+    height: 40px;
+    padding-top: 8px;
+    right:0;
+    bottom:0;
+    @include border-radius;
+    z-index: 1;
+  }
+}
+
 /*SOME page specific elements styles
 ------------------------------------------------------------------------------------------------*/
+
+
 /*SOME page specific elements styles
 ------------------------------------------------------------------------------------------------*/
+
+
 /*SOME page specific elements styles
 ------------------------------------------------------------------------------------------------*/
+
+
 /*SOME page specific elements styles
 ------------------------------------------------------------------------------------------------*/
-/*SOME page specific elements styles
-------------------------------------------------------------------------------------------------*/
-/*SOME page specific elements styles
-------------------------------------------------------------------------------------------------*/
+
+
 /*PLUGINS styles
 ------------------------------------------------------------------------------------------------*/
 
