@@ -42,3 +42,14 @@ $(function(){
         });
     }
 });
+
+$(function(){
+    $('.b-rating').rating({
+        fx: 'full',
+        image: 'images/stars.png',
+        loader: 'images/ajax-loader.gif',
+        minimal: 1,
+        readOnly: true
+//        url: 'rating.php',
+    });
+});
