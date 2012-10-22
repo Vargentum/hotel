@@ -251,9 +251,8 @@ textarea{
   @include ie9-gradient-support;
   @include filter-gradient(#f5f5f5, #ffffff, vertical);
   @include background-image(linear-gradient(top,  rgba(245,245,245,1) 0%,rgba(237,237,237,1) 2%,rgba(237,237,237,1) 5%,rgba(243,243,243,1) 21%,rgba(255,255,255,1) 42%,rgba(255,255,255,1) 100%));
-
 }
-input[type=radio],input[type=checkbox]{}
+input[type=radio],input[type=checkbox]{min-height: auto;padding:0;border:none;}
 button[type=submit]{
   background-color: #E81363;
   @include ie9-gradient-support;
@@ -1285,9 +1284,232 @@ body {
       &:hover,&:focus {@include gradient-tabsNav_hover;}
     }
 }
+/*HOTELS MAP page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.page-hotels_map{
+  background: url(../images/bg-hotels_map.png) 50% 0 no-repeat;
+  height: 905px;
+  position: relative;
+  margin: 30px 15px;
+  //@include border-1-solid(top);
+    .item{
+      position: absolute;
+      &.item-1{right: 663px; top: 118px;}
+      &.item-2{left: 301px; top: 147px;}
+      &.item-3{right: 520px; top: 201px;}
+      &.item-4{left: 407px; top: 220px;}
+      &.item-5{left: 321px; top: 255px;}
+      &.item-6{right: 627px; top: 260px;}
+      &.item-7{left: 576px; top: 451px;}
+      &.item-8{left: 355px; top: 498px;}
+      &.item-9{left: 592px; top: 673px;}
+      &.item-10{
+        left: 219px; top: 692px;
+        .item__link{position: relative;top:-5px;}
+      }
+      &.item-11{right: 348px; top: 700px;}
+      &.item-12{right: 285px; top: 770px;}
+      &.item-13{left: 666px; top: 773px;}
+      &.item-14{right: 268px; top: 808px;}
+    }
+      .item__link{
+        padding:0 28px;
+        font-size: 16px;
+        line-height: 32px;
+        @include link-simple-colors(#000, $linkHoverColor);
+      }
+    .expanded{
+      position: absolute;
+      bottom: 100%;
+      margin-bottom: 17px;
+      min-width: 270px;
+      z-index: 2;
+      background-color: rgb(143,229,138);
+      @include filter-gradient(#8fe58a, #40963f, vertical);
+      @include ie9-gradient-support;
+      @include background-image(linear-gradient(top,  rgba(143,229,138,1) 0%,rgba(129,218,126,1) 4%,rgba(102,200,99,1) 7%,rgba(88,189,85,1) 9%,rgba(85,183,84,1) 24%,rgba(78,174,76,1) 39%,rgba(69,157,70,1) 63%,rgba(64,150,63,1) 78%));
+      padding:10px;
+      @include border-radius;
+      &:before{
+        @include pseudoBlockAbs;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAICAYAAADnVO9eAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAW5JREFUeNqkkj9Lw0AYxt+k6Z9AB9vFQfoRumXs6gfwK7gpCMXB7m4OKk5dnayTQ5GC4KJFcNBJRaSbdVHaVNtr0tzlcr4XLyEtQRBf+PFe7sLz3PskWu2wtg0A+/B7Bd6Ltzu9nt7gmisChCXwF+Cqh2d6t949yBayx5qmAQhIhb2yJprc4pO2QCaBnuigLhIZeYbcKS4Xt5yBs0oduiICMTcKH/OrycWkk2ICquuKaE9O4iCk2qx6kU7o3l5rE7Ns7mRymTkT4YsBuSTNhKiWEJcvG2otb20jb4oRQs2SCRFGJFooF06oSze4z2uBH4Sjzx5mR9zmToqBFB4r8U9kFn0L69SKIwnC9H4qNsoX82AumZvMZXeU0Jz/7p+79+4THmWViadEh8iXisexWhadjyH9b4qN9JwOvUbvsdKo1NmIrZMOOZPjI1PFREVioziDP1ZsFP512Pp7/ZZRMp4FFzKmD8UQxTn8o74FGADKn6R7H1NoSAAAAABJRU5ErkJggg==);
+        width:25px;
+        height: 8px;
+        top:100%;
+        left:7px;
+      }
+    }
+      .image{border:2px solid #276c27; @include border-radius(3px);}
+      .content{width:170px;}
+        .name{
+          font-size: 16px; font-weight: bold; color:#fff;
+          margin-bottom: 5px;
+          &:after{content: '→'; font-size: 18px; line-height: 1; margin-left: 3px;}
+        }
+        .price{
+          float: right;
+          font-weight: bold;
+          font-size: 16px;
+          color:#fff;
+          position: relative;
+          top:-5px;
+        }
+        .button{
+          clear: both;
+          margin-top: 10px;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 1.3;
+          display: block;
+          background-color: #f8d202;
+          @include link-simple-colors($baseFontColor, $titleColor);
+          @include border-radius(4px);
+          text-align: center;
+          padding: 4px 0;
+          span{display: block; font-size: 12px;}
+        }
+}
+
+
+/*BOOKING PAYMENT page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.page-booking_payment{
+  z-index: 2;
+  margin:0 20px;
+  .l-sidebarLt{width:355px;vertical-align: top;}
+  .l-sidebarRt{
+    width:560px;
+    position: relative;
+    &:before{
+      @include pseudoBlockAbs;
+      background: url(../images/shadow-content_top.png);
+      width:960px;
+      height: 120px;
+      top:260px;
+      right:55px;
+      @include simple-transform( .65, -90deg);
+      .no-csstransforms &{display: none;}
+    }
+  }
+  .title{
+    font:bold 15px $titleFont;
+    text-transform: uppercase;
+    color:#363636;
+  }
+  >header{
+    @include hList; text-align: center;
+    font:bold 15px $titleFont;
+    text-transform: uppercase;
+    @include border-1-solid(bottom);
+    padding:10px 0;
+  }
+
+  .info{
+    margin: 60px 20px 10px 0;
+    padding:0 45px 50px 25px;
+    @include border-1-solid(bottom);
+    position: relative;
+    @include pie-clearfix;
+    .title{margin: 0 0 10px 30px;}
+    dl{
+      position: relative;
+      padding-left: 30px;
+      @include icon_small;
+      clear: both;
+      margin-bottom: 20px;
+      &:before{@include gradient-tabsNav_hover;}
+    }
+    dt{float: left; font-weight: bold;}
+  }
+    .info__period{&:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAAVFBMVEX09PT4+Pj////////////////x8fHv7+/x8fH////////w8PDw8PDx8fHu7u7v7+/v7+8AAAD5+fnv7+/w8PD4+Pj6+vr8/Pzu7u79/f3+/v7///9GecjGAAAAEnRSTlPRvCEOECXi8uQ/BOju5/nv8wAUu2WhAAAAZUlEQVR42k2JgQ6CQAxDp6IgqFwRb9z6///pRsjCy5rmrQJ00xXObboD8ihvexUnahAjfqAT1UT5QXHz6lmlLeu87czfqmI4GD22aw21Q5/KeDFX+l3spBTwrEGqJ9ckdNWW6PYH3WkO8dWyfc0AAAAASUVORK5CYII=);}}
+    .info__rooms{&:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAOCAYAAAASVl2WAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALlJREFUeNpi+P//PwMQMwNxIRDfAOKbQFwMxCwgOQYoY9F/CDgFxCeh7CVAzA5SEAsV+AXEPEDMBWWDQBoLAwODKQMEsAJxNhD/g7JBwACk4CoDAnQwoIKbDFAjt/3HBDuAmJ8B6gtWIN6LJLkPiNlAckxQo34D8XYko08C8S8QgwlJsAeIt6C5AUWBMBBL4lMgA8Ta+BRcBOJDUDYjXBTqCxBWR/KFF0ycERwhCBAOxDxAPBcmABBgAEhZtgpHDpm4AAAAAElFTkSuQmCC);}}
+    .info__price{
+      &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAMAAAAR8Wy4AAAAM1BMVEX////////w8PD////6+vr////y8vL////////////////////29vb///8AAADv7+////+ELQ30AAAAD3RSTlMgMO6gs3Dbj2AQUIDHQAA959O5AAAAW0lEQVR42l3OSw6AIAwEUBQUSr/3P61CG4J2BS/TSRPaPiLJH/wFRejkYBNaP0l34Gv+7i4BBFxGcKS8VCug2eHggzxWOFYqUdQElJayBfwPWx07ZJA1L1T9Zh7fcQye5MnrKwAAAABJRU5ErkJggg==);}
+      dd{
+        font-size: 18px;
+        position: absolute;
+        right:10px; bottom:-70px;
+      }
+    }
+  .goBack{
+      font-style: italic; font-family: $titleFont;
+      @include link-simple-colors($titleColor, $linkHoverColor);
+      margin-left: 50px;
+    }
+
+  .payment_type{
+    margin:10px 0 20px;
+    .title{
+      margin: 0 0 10px 25px;
+      @include square;
+      @include square-after;
+      &:before{margin-right: 5px;}
+      &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAMAAADto6y6AAAAM1BMVEX////6+vr////////////////w8PD////////y8vL////////29vYAAAD////v7+////94rOZGAAAAD3RSTlNQszCPcBDuIKDbYEDHAIB+8kyWAAAAiUlEQVR42pXS2Q6EIAxAUTcWobfy/187acIgsc7D3CflxAKJC+lQF7CU9pLBeKn6C8oEVb+wB2AQ2jpkqkjOHioy5sSsM4ytFbhBIOXLnk7OZhlYZ4VgSyutwxi9EC7/hbUhbo/5aFHkhlJUC5u/x54glMuBZXP+ActBXPVRB008Mjjae/1n8H0ACvQdwz50KD4AAAAASUVORK5CYII=);}
+    }
+    .content{display: block;line-height: 1.2;}
+    label{
+      position: relative;padding-left: 25px;
+      display: block;
+      margin-bottom: 15px;
+    }
+      .label__title{
+        color:$baseFontColor;
+        display: block;
+        text-transform: uppercase;
+        font-family: $titleFont;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+      input{position: absolute;left:0; top:0;height: 15px;}
+  }
+
+  .personal_info{
+    .title{
+      margin: 0 0 10px 25px;
+      @include square;
+      @include square-after;
+      &:before{margin-right: 5px;}
+      &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAMAAAB2Mu6sAAAAM1BMVEX////////////w8PD6+vr////////////////////////y8vL////29vYAAADv7+/////O8rjYAAAAD3RSTlOPMCDus2BwoFCAENtAxwCRNY+yAAAAbUlEQVR42o2RWwqAMAwE67OPZLe9/2nVohY1BecrMGQXEpdQDJAciglc6XCKHNSbIpCUGhF30ISSrG0Ld9YmPDlkK6oIstXh5Rinj1g4HmlJXgIkIxKpLxF4IU+ht8DPjbxqJczPDpvu2buP2gAj6xkrYs4pFAAAAABJRU5ErkJggg==);}
+    }
+    label{
+      margin-right: 150px;
+      @include hList;
+      text-align: right;
+      display: block;
+      margin-bottom: 10px;
+    }
+    input{width:240px;margin-left: 15px;}
+  }
+
+  .submit_button{
+    display: block;
+    width:100%;
+    margin-top: 50px;
+    padding:7px 0 10px;
+    text-transform: none;
+    text-align: center;
+    color:#fff;
+    font:italic 21px $titleFont;
+    border:5px solid #eee;
+    @include border-radius(10px);
+    @include textShadow-forWhite;
+    @include gradient-tabsNav_default;
+    &:hover,&:focus{@include gradient-tabsNav_hover;}
+    &:before{content: '✔'; font-style: normal;padding-right: 5px;}
+  }
+}
+
 /*SOME page specific elements styles
 ------------------------------------------------------------------------------------------------*/
 
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
+
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
+
+/*SOME page specific elements styles
+------------------------------------------------------------------------------------------------*/
 
 /*MODIFICATORS styles
 ------------------------------------------------------------------------------------------------*/

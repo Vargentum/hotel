@@ -46,10 +46,17 @@ $(function(){
 $(function(){
     $('.b-rating').rating({
         fx: 'full',
-        image: 'images/stars.png',
+        image: 'images/rating.png',
         loader: 'images/ajax-loader.gif',
-        minimal: 1,
         readOnly: true
 //        url: 'rating.php',
+    });
+});
+$(function(){
+    $('.b-rating_small').rating({
+        fx: 'full',
+        image: 'images/rating_small.png',
+        loader: 'images/ajax-loader.gif',
+        readOnly: true
     });
 });
