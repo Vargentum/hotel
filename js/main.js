@@ -29,15 +29,11 @@ $(function(){
         });
     });
     if(Modernizr.csscolumns){
+
         return false;
     }
     else{
-        $('.page-benefits_list').columnize({
-            width: 465,
-            columns: 2
-        });
-        $('.page-lucky .content').columnize({
-//            width: 400
+        $('.page-benefits_list, .page-lucky .content, .l-columnize_2, .b-feedbacks .list').columnize({
             columns: 2
         });
     }

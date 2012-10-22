@@ -269,6 +269,14 @@ button[type=submit]{
 }
 /*OBJECTS mixins
 --------------------------------------------*/
+@mixin moreInfoLink{
+  font-family: $titleFont;
+  font-style: italic;
+  color:$titleColor;
+  text-transform: lowercase;
+}
+@mixin arrow-prew{&:before{content: '← ';}}
+@mixin arrow-next{&:after{content: ' →';}}
 @mixin title-base{
   font:15px $titleFont;
   color:$titleColor;
@@ -361,6 +369,21 @@ button[type=submit]{
     @include border-radius;
   }
 }
+@mixin shadow{
+  &:before{
+    @include pseudoBlockAbs;
+    background: url(../images/shadow-content_top.png);
+    width:960px;
+    height: 120px;
+    left:50%;
+    margin-left: -480px;
+    top:100%;
+  }
+}
+@mixin columnize_2{
+  .csscolumns &{@include columns(460px 2);}
+}
+.l-columnize_2{@include columnize_2;}
 /*LAYOUT
 ----------------------------------------------------------*/
 html, button, input, select, textarea {
@@ -626,15 +649,7 @@ body {
   padding:7px 0 10px 12px;
   position: relative;
   z-index: 1;
-  &:before{
-    @include pseudoBlockAbs;
-    background: url(../images/shadow-content_top.png);
-    width:960px;
-    height: 120px;
-    left:50%;
-    margin-left: -480px;
-    top:100%;
-  }
+  @include shadow;
   &.m-no_bottom_shadow:before{display: none;}
   ul{@include hList;}
   .item{
@@ -659,6 +674,10 @@ body {
   width:960px;
   height: 114px;
   margin: 20px auto;
+  .page-index &{
+    position: relative;left:-10px;
+    margin: 35px auto;
+  }
 }
 
 /*MAIN page specific elements styles
@@ -930,16 +949,9 @@ body {
   position: relative;
   z-index: 1;
   margin-bottom: 15px;
-  &:before{
-    @include pseudoBlockAbs;
-    background: url(../images/shadow-content_top.png);
-    width:960px;
-    height: 120px;
-    left:50%;
-    margin-left: -480px;
-    bottom:-130px;
-  }
+  @include shadow;
   .page-booking &:before{display: none;}
+  .page-index &:before{display: none;}
   ul{
     .flexbox &{
       @include display-box;
@@ -1156,16 +1168,16 @@ body {
     @include border-1-solid(bottom);
     text-align: center;
     position: relative;
-    &:before{
-      @include pseudoBlockAbs;
-      background: url(../images/shadow-content_top.png);
-      width:960px;
-      height: 120px;
-      left:50%;
-      margin-left: -480px;
-      top:0;
-    }
+    @include shadow;
     .b-rating{@include inline-block;}
+  }
+  .seoText{
+    margin:10px 0;
+    .title{
+      @include title-base;
+      color:$baseFontColor;
+      margin:0 0 10px 20px;
+    }
   }
 }
 .b-hotel{
@@ -1499,12 +1511,189 @@ body {
   }
 }
 
-/*SOME page specific elements styles
+/*INDEX page specific elements styles
 ------------------------------------------------------------------------------------------------*/
-
-/*SOME page specific elements styles
+.page-index{}
+.b-seoText{
+  background-color: #f6f6f6;
+  @include border-radius(5px 5px 0 0);
+  padding:10px 10px 10px 5px;
+  margin:15px 0 10px;
+  .content{width:620px;}
+    .title{@include title-base;}
+  .moreInfo{
+    @include moreInfoLink;
+    line-height: 2;
+    display: block;
+    margin-top: 10px;
+    @include border-1-solid(top);
+    border-bottom:1px solid #fff;
+  }
+}
+.b-articlesPreview{
+  @include link-simple-colors(#fff, $linkHoverColor);
+  font-size: 14px;
+  @include textShadow-forWhite;
+  border:5px solid #eee;
+  width:310px; height: 140px;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  &:before{
+    @include pseudoBlockAbs;
+    width:130px;
+    height: 130px;
+    background-color: rgb(232,19,99);
+    @include filter-gradient(#e81363, #aa0029, vertical);
+    @include ie9-gradient-support;
+    @include background-image(linear-gradient(top,  rgba(232,19,99,1) 0%,rgba(219,15,78,1) 4%,rgba(213,12,67,1) 9%,rgba(208,9,64,1) 26%,rgba(205,11,64,1) 30%,rgba(206,9,63,1) 35%,rgba(187,3,53,1) 76%,rgba(183,0,49,1) 93%,rgba(170,0,41,1) 100%));
+    @include rotate(-135deg);
+    left:-40px; top:0;
+  }
+  &:hover:before, &:focus:before{left:-35px;}
+  .title{
+    @include vCtr;
+    width:80px;
+    position: relative;z-index: 1;
+    left:13px;
+  }
+  &.item-1{background-image: url(../images/page-index__articlesPreview-1.jpg);}
+  &.item-2{background-image: url(../images/page-index__articlesPreview-2.jpg);}
+  &.item-3{background-image: url(../images/page-index__articlesPreview-3.jpg);}
+}
+.page-index__tabsNav__title{
+  @include title-base;
+  color: $baseFontColor;
+  margin-top: 10px;
+  padding:20px 20px 10px;
+  @include shadow;
+  position: relative;
+  &:before{top:0;}
+}
+.page-index__viewAllHotels_button{
+  position: relative;
+  display: block;
+  text-align: center;
+  border:10px solid #eee;
+  @include border-radius(10px);
+  @include gradient-tabsNav_default;
+  font:italic 21px $titleFont;
+  @include link-simple-colors(#fff, $linkHoverColor);
+  @include arrow-next;
+  padding:7px 0 10px;
+  @include shadow;
+  margin-top: 10px;
+  &:before{top:120%;}
+}
+.b-feedbacks{
+  margin:0 10px;
+  .title{
+    @include title-base;color:$baseFontColor;
+    margin:15px 10px;
+  }
+  .list{@include columns(430px 2);@include border-1-solid(bottom);}
+    .item{
+      margin-bottom: 15px;
+      @include square-absolute;
+      @include square-after;
+      &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAARCAYAAAAsT9czAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNqUlT8sQ1EUxm/bECGaShgwWMRmNQgD6WSw2Ug0NkMHsRo6GBnEYDQ1EZEwmAwiJosKiaWJbmpgQItSub6b3BunL/fcd3qS38u9yfned/+cd15Sa60sK+AO1PV/vIELkCV5UfrANnjQrfEIDsCIyzWPTlDQ4fgEy4zRZYz2Gow6s0Uti1cwFjHbEmrPQCaplMopWaTBJJn3gqxQOwPGjdmgkkeCjFNt6oaM2X0bIk3GNdAQ6n5A2ZgVQV1oVCLzJjgUmlVA1V30EqjFXHIZdEUKpBvsCwpk11Q9Fc6DSkCwwXxnHfbTaTC6JphypU85ZQTPnrKnDIAqoz1xJ0IFw/al3K4SAbMc+GWawSztII48Y3QL0gEjc4zHjHaH5rpBBlx5kk3RTAeMDBPg3aO9se2sxcysbJVZWT7GyPTVI4/uxbdIt6tzj2Avxsjd81dE9wEWfPluYFbxRARF0CMwS4H1iNkal08nc+Db/r/6BUaUTVuNhVDenwADAA6s0O/zQXU1AAAAAElFTkSuQmCC);}
+    }
+      .item__header{
+        font-size: 12px;
+        text-transform: uppercase;
+        color:$titleColor;
+      }
+      .author:after{content: ', ';}
+  .moreInfo{
+    @include moreInfoLink;float: right;@include arrow-next;
+    padding-top: 5px;
+  }
+}
+/*HOTEL INFO page specific elements styles
 ------------------------------------------------------------------------------------------------*/
+.page-hotel_info{
+  >header{
+    @include hList; text-align: center;
+    font:bold 15px $titleFont;
+    color:#343434;
+    text-transform: uppercase;
+    @include border-1-solid(bottom);
+    padding:10px 0;
+  }
+  .l-sidebarRt,
+  .l-sidebarLt{width:475px; outline: 1px solid;}
+      .title{
+        @include title-base; color:#343434;
+        @include square;
+        font-weight: bold;
+        @include square-after;
+        margin-bottom: 5px;
+        &:before{margin-right: 10px;}
+      }
+    .info{
+      @include border-1-solid(bottom);
+      .title{
+        &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAAM1BMVEX6+vry8vL////////////////////////////w8PD////////29vb///8AAADv7+////9Lp/c+AAAAD3RSTlOz23AQYDCPUCDugKDHQABGXHssAAAAjklEQVR42pXRyw7EIAhAUXyjtMj/f+3YFnVMncXclZ4QEiOwFmxpJadXdZ9FI5yORr6y3UOVJXoclWfxdtPHztQnUnMv2sl86DE3z/KeFw9BdgHYcT5KHPMViqz7NaAfXv70tHUDbusRmHaOwLhxYmC2r3dld7lumtWg/xUXzmH8b8qTybH6lYd7t4n43D+/ex2FkR2DaQAAAABJRU5ErkJggg==);}
+      }
+      .address{
+        margin-bottom: 10px;
+        padding-left: 30px;
+        position: relative;
+        @include icon_small;
+        &:before{@include gradient-tabsNav_hover;}
+        &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAJFBMVEX////////////////////////w8PD////y8vIAAADv7+////8FuAQOAAAACnRSTlMgQGCAcBDuMNsAoVcH+gAAAF9JREFUeNplzlEOwCAIA1AcKgL3v+/aMbNs64fhhVQVR3Rm5lRM4FhZWYOEtkHNJyrOXhytB/viiXR37xxEeBrYONT22Nu72626n5vf7/5/BcelGA4iFpQ5WS6B5QkhJ8OvCAmbRl/HAAAAAElFTkSuQmCC);}
+        dt{font-weight: bold; float: left;margin-right: 5px;}
+        dd{}
+        .telephone{color:$titleColor; font-weight: bold;}
+      }
+      .paymentAccepted{
+        margin-bottom: 10px;
+        padding-left: 30px;
+        position: relative;
+        @include icon_small;
+        &:before{@include gradient-tabsNav_hover;}
+        &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAMAAAAR8Wy4AAAAM1BMVEX////////w8PD////6+vr////y8vL////////////////////29vb///8AAADv7+////+ELQ30AAAAD3RSTlMgMO6gs3Dbj2AQUIDHQAA959O5AAAAW0lEQVR42l3OSw6AIAwEUBQUSr/3P61CG4J2BS/TSRPaPiLJH/wFRejkYBNaP0l34Gv+7i4BBFxGcKS8VCug2eHggzxWOFYqUdQElJayBfwPWx07ZJA1L1T9Zh7fcQye5MnrKwAAAABJRU5ErkJggg==);}
+        dt{font-weight: bold;}
+      }
+    }
+    .services{
+      margin: 10px 0;
+      @include border-1-solid(bottom);
+      .title{
+        &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAVCAMAAACaPIWZAAAAMFBMVEXy8vL////29vb////////////////6+vr////////w8PD///////8AAADv7+////8eU5S7AAAADnRSTlPbcMdQECAws2BA7qCAABKNQMIAAABZSURBVHja7ZExEoAwCATRxAAhwP9/K6BjY23nFsfcXgloQeDWtKObHCWAo9L0ZGCmLdUusPwh11p28/Jvfv+NnxuTuSM3uT3PsKTBcMxz5CIQfehFvrZg1RMgbRqEacCeagAAAABJRU5ErkJggg==);}
+      }
+      dt{font-weight: bold; float: left;margin-right: 5px;}
+      dd{margin-bottom: 7px;}
+    }
+    .feedbacks{
+      @include border-1-solid(bottom);
+      margin-bottom: 10px;
+      .title{
+        &:after{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAARCAYAAAAsT9czAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNqUlT8sQ1EUxm/bECGaShgwWMRmNQgD6WSw2Ug0NkMHsRo6GBnEYDQ1EZEwmAwiJosKiaWJbmpgQItSub6b3BunL/fcd3qS38u9yfned/+cd15Sa60sK+AO1PV/vIELkCV5UfrANnjQrfEIDsCIyzWPTlDQ4fgEy4zRZYz2Gow6s0Uti1cwFjHbEmrPQCaplMopWaTBJJn3gqxQOwPGjdmgkkeCjFNt6oaM2X0bIk3GNdAQ6n5A2ZgVQV1oVCLzJjgUmlVA1V30EqjFXHIZdEUKpBvsCwpk11Q9Fc6DSkCwwXxnHfbTaTC6JphypU85ZQTPnrKnDIAqoz1xJ0IFw/al3K4SAbMc+GWawSztII48Y3QL0gEjc4zHjHaH5rpBBlx5kk3RTAeMDBPg3aO9se2sxcysbJVZWT7GyPTVI4/uxbdIt6tzj2Avxsjd81dE9wEWfPluYFbxRARF0CMwS4H1iNkal08nc+Db/r/6BUaUTVuNhVDenwADAA6s0O/zQXU1AAAAAElFTkSuQmCC);}
+      }
+      .item{margin-bottom: 10px;}
+        .item__header{
+          font-size: 12px;
+          text-transform: uppercase;
+          color:$titleColor;
+        }
+          .author:after{content: ', ';}
+    }
 
+  .big_button{
+    position: relative;
+    display: block;
+    text-align: center;
+    border:10px solid #eee;
+    @include border-radius(10px);
+    @include gradient-tabsNav_default;
+    font:italic 21px $titleFont;
+    @include link-simple-colors(#fff, $linkHoverColor);
+    @include arrow-next;
+    padding:7px 0 10px;
+    margin-top: 30px;
+  }
+}
 /*SOME page specific elements styles
 ------------------------------------------------------------------------------------------------*/
 
@@ -1513,7 +1702,7 @@ body {
 
 /*MODIFICATORS styles
 ------------------------------------------------------------------------------------------------*/
-
+.m-color_939393{color:#939393;}
 /*PLUGINS styles
 ------------------------------------------------------------------------------------------------*/
 div.vote-wrap{overflow: hidden;}

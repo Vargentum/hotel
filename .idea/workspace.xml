@@ -25,16 +25,45 @@
           <file leaf-file-name="template.html" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/template.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="16" column="39" selection-start="738" selection-end="738" vertical-scroll-proportion="7.857143">
+                <state line="16" column="39" selection-start="0" selection-end="6898" vertical-scroll-proportion="-0.78571427">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="booking_payment.html" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="hotel_info.html" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/hotel_info.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="177" column="70" selection-start="11816" selection-end="11816" vertical-scroll-proportion="0.51707315">
+                  <folding>
+                    <element signature="tag#ul#0;tag#div#2;tag#div#1;tag#div#0;tag#div#0;tag#div#0;tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="booking.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/booking.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="429" column="0" selection-start="22416" selection-end="22534" vertical-scroll-proportion="-1.9275362">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="booking_payment.html" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/booking_payment.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="142" column="45" selection-start="6938" selection-end="6950" vertical-scroll-proportion="-0.7707317">
+                <state line="77" column="18" selection-start="3986" selection-end="3986" vertical-scroll-proportion="-3.9285715">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="253" column="67" selection-start="16572" selection-end="16599" vertical-scroll-proportion="-3.826087">
                   <folding />
                 </state>
               </provider>
@@ -43,10 +72,13 @@
           <file leaf-file-name="screen.scss" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sass/screen.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="330" column="10" selection-start="11576" selection-end="11586" vertical-scroll-proportion="-10.296296">
+                <state line="322" column="11" selection-start="11475" selection-end="11486" vertical-scroll-proportion="-10.296296">
                   <folding>
-                    <element signature="e#7865#8745#2" expanded="true" />
-                    <element signature="e#43515#45162#2" expanded="true" />
+                    <marker date="1350930334626" expanded="true" signature="7878:7904" placeholder="{...}" />
+                    <marker date="1350930334626" expanded="true" signature="7887:7903" placeholder="{...}" />
+                    <marker date="1350930334626" expanded="true" signature="7922:7947" placeholder="{...}" />
+                    <marker date="1350930334626" expanded="true" signature="7930:7946" placeholder="{...}" />
+                    <marker date="1350930334626" expanded="true" signature="58005:66745" placeholder="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -56,21 +88,53 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="screen.scss" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="screen.scss" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/sass/screen.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="1430" column="16" selection-start="72610" selection-end="72610" vertical-scroll-proportion="0.8039443">
+                <state line="1693" column="21" selection-start="83150" selection-end="83150" vertical-scroll-proportion="0.84191614">
                   <folding>
-                    <element signature="e#18071#20083#2" expanded="true" />
-                    <element signature="e#68303#68946#2" expanded="true" />
-                    <element signature="e#70544#70630#0" expanded="false" />
-                    <element signature="e#71274#71681#2" expanded="true" />
-                    <element signature="e#71728#72127#2" expanded="true" />
-                    <element signature="e#72181#72528#2" expanded="true" />
-                    <element signature="e#72651#72799#0" expanded="false" />
-                    <element signature="e#73002#73409#2" expanded="true" />
-                    <element signature="e#73861#74588#0" expanded="false" />
-                    <element signature="e#74023#74394#2" expanded="true" />
+                    <element signature="e#8074#8954#2" expanded="true" />
+                    <element signature="e#14194#15069#2" expanded="true" />
+                    <element signature="e#18590#20602#2" expanded="true" />
+                    <element signature="e#25499#26446#2" expanded="true" />
+                    <element signature="e#28425#29072#2" expanded="true" />
+                    <element signature="e#29272#30175#2" expanded="true" />
+                    <element signature="e#30927#31902#2" expanded="true" />
+                    <element signature="e#32257#32636#2" expanded="true" />
+                    <element signature="e#34205#36780#2" expanded="true" />
+                    <element signature="e#36865#39160#2" expanded="true" />
+                    <element signature="e#39251#41870#2" expanded="true" />
+                    <element signature="e#41955#43722#2" expanded="true" />
+                    <element signature="e#43807#45454#2" expanded="true" />
+                    <element signature="e#46132#47123#2" expanded="true" />
+                    <element signature="e#47231#48222#2" expanded="true" />
+                    <element signature="e#48719#51966#2" expanded="true" />
+                    <element signature="e#52437#52848#2" expanded="true" />
+                    <element signature="e#53042#53721#2" expanded="true" />
+                    <element signature="e#54128#54451#2" expanded="true" />
+                    <element signature="e#54668#55099#2" expanded="true" />
+                    <element signature="e#56100#57199#2" expanded="true" />
+                    <element signature="e#58658#59065#2" expanded="true" />
+                    <element signature="e#59566#60201#2" expanded="true" />
+                    <element signature="e#60242#60677#2" expanded="true" />
+                    <element signature="e#60718#61273#2" expanded="true" />
+                    <element signature="e#61314#61785#2" expanded="true" />
+                    <element signature="e#61826#62109#2" expanded="true" />
+                    <element signature="e#62150#62477#2" expanded="true" />
+                    <element signature="e#62518#62977#2" expanded="true" />
+                    <element signature="e#63361#65560#2" expanded="true" />
+                    <element signature="e#68548#69191#2" expanded="true" />
+                    <element signature="e#71519#71926#2" expanded="true" />
+                    <element signature="e#71973#72372#2" expanded="true" />
+                    <element signature="e#72426#72773#2" expanded="true" />
+                    <element signature="e#73247#73654#2" expanded="true" />
+                    <element signature="e#74268#74639#2" expanded="true" />
+                    <element signature="e#77844#78507#2" expanded="true" />
+                    <element signature="e#79500#79915#2" expanded="true" />
+                    <element signature="e#80141#80464#2" expanded="true" />
+                    <element signature="e#80831#81178#2" expanded="true" />
+                    <element signature="e#81350#81689#2" expanded="true" />
+                    <element signature="e#81926#82589#2" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -79,7 +143,7 @@
           <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="55" column="22" selection-start="2906" selection-end="2906" vertical-scroll-proportion="0.0">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -98,17 +162,18 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/sass/normalize.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/lucky.html" />
         <option value="$PROJECT_DIR$/about_us.html" />
         <option value="$PROJECT_DIR$/template.html" />
         <option value="$PROJECT_DIR$/contact_us.html" />
         <option value="$PROJECT_DIR$/info.html" />
-        <option value="$PROJECT_DIR$/booking.html" />
-        <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/hotels_map.html" />
         <option value="$PROJECT_DIR$/booking_payment.html" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/main.js" />
+        <option value="$PROJECT_DIR$/booking.html" />
         <option value="$PROJECT_DIR$/sass/screen.scss" />
+        <option value="$PROJECT_DIR$/hotel_info.html" />
       </list>
     </option>
   </component>
@@ -172,8 +237,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="preferences.sourceCode.SCSS" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="hotel" serverId="3edb3e17-b704-4e7e-95ce-7ed611625471">
     <servers>
@@ -318,43 +383,13 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sass/screen.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="273" column="0" selection-start="6529" selection-end="6529" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#18071#20083#2" expanded="true" />
-            <element signature="e#68303#68946#2" expanded="true" />
-            <element signature="e#70544#70630#0" expanded="false" />
-            <element signature="e#71274#71681#2" expanded="true" />
-            <element signature="e#71728#72127#2" expanded="true" />
-            <element signature="e#72181#72528#2" expanded="true" />
-            <element signature="e#72651#72799#0" expanded="false" />
-            <element signature="e#73002#73409#2" expanded="true" />
-            <element signature="e#73861#74588#0" expanded="false" />
-            <element signature="e#74023#74394#2" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="2022" selection-end="2022" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sass/screen.scss">
-      <provider selected="true" editor-type-id="text-editor">
         <state line="259" column="1" selection-start="6253" selection-end="6253" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#18071#20083#2" expanded="true" />
-            <element signature="e#68303#68946#2" expanded="true" />
-            <element signature="e#70544#70630#0" expanded="false" />
-            <element signature="e#71274#71681#2" expanded="true" />
-            <element signature="e#71728#72127#2" expanded="true" />
-            <element signature="e#72181#72528#2" expanded="true" />
-            <element signature="e#72651#72799#0" expanded="false" />
-            <element signature="e#73002#73409#2" expanded="true" />
-            <element signature="e#73861#74588#0" expanded="false" />
-            <element signature="e#74023#74394#2" expanded="true" />
+            <marker date="1350930334626" expanded="true" signature="7878:7904" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7887:7903" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7922:7947" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7930:7946" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="58005:66745" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -370,33 +405,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#18071#20083#2" expanded="true" />
-            <element signature="e#68303#68946#2" expanded="true" />
-            <element signature="e#70544#70630#0" expanded="false" />
-            <element signature="e#71274#71681#2" expanded="true" />
-            <element signature="e#71728#72127#2" expanded="true" />
-            <element signature="e#72181#72528#2" expanded="true" />
-            <element signature="e#72651#72799#0" expanded="false" />
-            <element signature="e#73002#73409#2" expanded="true" />
-            <element signature="e#73861#74588#0" expanded="false" />
-            <element signature="e#74023#74394#2" expanded="true" />
+            <marker date="1350930334626" expanded="true" signature="7878:7904" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7887:7903" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7922:7947" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7930:7946" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="58005:66745" placeholder="{...}" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lucky.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="25" selection-start="8390" selection-end="8390" vertical-scroll-proportion="-5.1190476" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/benefits_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="6" selection-start="273" selection-end="273" vertical-scroll-proportion="-3.9285715" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/about_us.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="3" selection-start="11457" selection-end="11457" vertical-scroll-proportion="0.20121951" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/contact_us.html">
@@ -409,13 +429,6 @@
         <state line="407" column="19" selection-start="25971" selection-end="25971" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="22" selection-start="2906" selection-end="2906" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hotels_map.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="111" column="40" selection-start="5798" selection-end="5798" vertical-scroll-proportion="-1.5238096">
@@ -423,41 +436,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking.html">
+    <entry file="file://$PROJECT_DIR$/lucky.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="412" column="18" selection-start="20124" selection-end="20124" vertical-scroll-proportion="-5.753623">
+        <state line="93" column="23" selection-start="5449" selection-end="5449" vertical-scroll-proportion="-7.1666665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/about_us.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="158" column="18" selection-start="12323" selection-end="12477" vertical-scroll-proportion="-15.142858">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="39" selection-start="738" selection-end="738" vertical-scroll-proportion="7.857143">
+        <state line="16" column="39" selection-start="0" selection-end="6898" vertical-scroll-proportion="-0.78571427">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="429" column="0" selection-start="22416" selection-end="22534" vertical-scroll-proportion="-1.9275362">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/booking_payment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="45" selection-start="6938" selection-end="6950" vertical-scroll-proportion="-0.7707317">
+        <state line="77" column="18" selection-start="3986" selection-end="3986" vertical-scroll-proportion="-3.9285715">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="253" column="67" selection-start="16572" selection-end="16599" vertical-scroll-proportion="-3.826087">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/screen.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1430" column="16" selection-start="72610" selection-end="72610" vertical-scroll-proportion="0.8039443">
+        <state line="322" column="11" selection-start="11475" selection-end="11486" vertical-scroll-proportion="-10.296296">
           <folding>
-            <element signature="e#18071#20083#2" expanded="true" />
-            <element signature="e#68303#68946#2" expanded="true" />
-            <element signature="e#70544#70630#0" expanded="false" />
-            <element signature="e#71274#71681#2" expanded="true" />
-            <element signature="e#71728#72127#2" expanded="true" />
-            <element signature="e#72181#72528#2" expanded="true" />
-            <element signature="e#72651#72799#0" expanded="false" />
-            <element signature="e#73002#73409#2" expanded="true" />
-            <element signature="e#73861#74588#0" expanded="false" />
-            <element signature="e#74023#74394#2" expanded="true" />
+            <marker date="1350930334626" expanded="true" signature="7878:7904" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7887:7903" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7922:7947" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="7930:7946" placeholder="{...}" />
+            <marker date="1350930334626" expanded="true" signature="58005:66745" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hotel_info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="177" column="70" selection-start="11816" selection-end="11816" vertical-scroll-proportion="0.51707315">
+          <folding>
+            <element signature="tag#ul#0;tag#div#2;tag#div#1;tag#div#0;tag#div#0;tag#div#0;tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
           </folding>
         </state>
       </provider>
