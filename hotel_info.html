@@ -88,15 +88,130 @@
                 <!--header-->
                 <header>
                     <h1 itemprop='name'>Грин Парк Отель</h1>
-                    <div class="b-rating" itemprop='aggregateRating' itemscope itemtype='http://schema.org/Rating'>
-                        <input type="hidden" name="val" value="2" itemprop='ratingValue'/>
+                    <div class="b-rating">
+                        <input type="hidden" name="val" value="2"/>
                     </div>
                 </header>
                 <!--content-->
                 <div class="l-jList">
                     <!--left part-->
                     <div class="l-sidebarLt">
-                        <img src="images/hotel_info__mainImage.jpg" alt="">
+                        <!--slider-->
+                        <div class="b-slider">
+                            <ul class="viewport">
+                                <li class="viewport__item"><img src="images/hotel_info__mainImage.jpg" alt=""></li>
+                            </ul>
+                            <div class="content">
+                                <a href="#" class="control control__prev"></a>
+                                <ul class="thumbs">
+                                    <li class="thumbs__item"><img src="images/hotel_info__mainImage.jpg" alt=""></li>
+                                    <li class="thumbs__item active"><img src="images/hotel_info__mainImage.jpg" alt=""></li>
+                                    <li class="thumbs__item"><img src="images/hotel_info__mainImage.jpg" alt=""></li>
+                                </ul>
+                                <a href="#" class="control control__next"></a>
+                            </div>
+                        </div>
+                        <!--calendar-->
+                        <div class="b-calendar l-jList">
+                            <h2 class="title">выбор даты для бронирования</h2>
+                            <label>
+                                <span class="l-jList">
+                                    <span class="label__title">Дата заезда:</span>
+                                    <input type="text"/>
+                                </span>
+                                <span id="from"></span>
+                            </label>
+                            <label>
+                                <span class="l-jList">
+                                    <span class="label__title">Дата выезда:</span>
+                                    <input type="text"/>
+                                </span>
+                                <span id="to"></span>
+                            </label>
+                        </div>
+                        <!--rooms_choise-->
+                        <div class="b-rooms_choise">
+                            <h2 class="title">выбор номера для бронирования</h2>
+                            <div class="service_msg">
+                                <p>Доступно множественное бронирование.</p>
+                                <p>Выберите необходимое количество номеров и их формат.</p>
+                            </div>
+                            <ul>
+                                <li class="b-rooms_choise__item item-1">
+                                    <label>
+                                        <span class="checkbox">
+                                            <input type="checkbox">
+                                        </span>
+                                        <span class="content__top">
+                                            <span class="name">Одноместное размещение количество номеров</span>
+                                            <span class="price">2900 руб</span>
+                                        </span>
+                                    </label>
+                                    <div class="l-jList">
+                                        <input type="number">
+                                        <!--services list-->
+                                        <ul class="services">
+                                            <li class="item item-1 disabled ir">unknown service</li>
+                                            <li class="item item-2 ir">Taxi</li>
+                                            <li class="item item-3 ir">Drink</li>
+                                            <li class="item item-4 disabled ir">Parking</li>
+                                            <li class="item item-5 ir">Safe</li>
+                                            <li class="item item-6 ir">TV</li>
+                                            <li class="item item-7 ir">Food</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="b-rooms_choise__item item-2 active">
+                                    <label>
+                                        <span class="checkbox">
+                                            <input type="checkbox">
+                                        </span>
+                                        <span class="content__top">
+                                            <span class="name">Двухместное размещение количество номеров</span>
+                                            <span class="price">2900 руб</span>
+                                        </span>
+                                    </label>
+                                    <div class="l-jList">
+                                        <input type="number">
+                                        <!--services list-->
+                                        <ul class="services">
+                                            <li class="item item-1 disabled ir">unknown service</li>
+                                            <li class="item item-2 ir">Taxi</li>
+                                            <li class="item item-3 ir">Drink</li>
+                                            <li class="item item-4 disabled ir">Parking</li>
+                                            <li class="item item-5 ir">Safe</li>
+                                            <li class="item item-6 ir">TV</li>
+                                            <li class="item item-7 ir">Food</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="b-rooms_choise__item item-3">
+                                    <label>
+                                        <span class="checkbox">
+                                            <input type="checkbox">
+                                        </span>
+                                        <span class="content__top">
+                                            <span class="name">Трехместное размещение количество номеров</span>
+                                            <span class="price">4900 руб</span>
+                                        </span>
+                                    </label>
+                                    <div class="l-jList">
+                                        <input type="number">
+                                        <!--services list-->
+                                        <ul class="services">
+                                            <li class="item item-1 disabled ir">unknown service</li>
+                                            <li class="item item-2 ir">Taxi</li>
+                                            <li class="item item-3 ir">Drink</li>
+                                            <li class="item item-4 disabled ir">Parking</li>
+                                            <li class="item item-5 ir">Safe</li>
+                                            <li class="item item-6 ir">TV</li>
+                                            <li class="item item-7 ir">Food</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
                     </div>
                     <!--right part-->
                     <div class="l-sidebarRt">
@@ -173,6 +288,7 @@
                                 </li>
                             </ul>
                         </div>
+                        <a href="#" class="feedbacks__viewAll floatRt">все отзывы об отеле</a>
                     </div><!--end right sidebar-->
                 </div><!--end hotel__content-->
                 <a href="#" class="big_button">Продолжить бронирование</a>
@@ -215,6 +331,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+<script src="js/plugins/jquery-ui-1.9.0.custom.min.js"></script>
 <script src="js/vendor/jquery.columnizer.min.js"></script>
 <script src="js/plugins/jquery.rating-2.0.min.js"></script>
 <script src="js/main.js"></script>

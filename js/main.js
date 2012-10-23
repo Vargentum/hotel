@@ -38,6 +38,20 @@ $(function(){
         });
     }
 });
+$(function(){
+    $( "#from" ).datepicker({
+        defaultDate: "+1w",
+        onSelect: function( selectedDate ) {
+            $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        }
+    });
+    $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        onSelect: function( selectedDate ) {
+            $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        }
+    });
+});
 
 $(function(){
     $('.b-rating').rating({
@@ -56,3 +70,4 @@ $(function(){
         readOnly: true
     });
 });
+
