@@ -58,7 +58,8 @@ $(function(){
         fx: 'full',
         image: 'images/rating.png',
         loader: 'images/ajax-loader.gif',
-        readOnly: true
+        readOnly: true,
+        stars: 5
 //        url: 'rating.php',
     });
 });
@@ -67,7 +68,8 @@ $(function(){
         fx: 'full',
         image: 'images/rating_small.png',
         loader: 'images/ajax-loader.gif',
-        readOnly: true
+        readOnly: true,
+        stars: 5
     });
 });
 
